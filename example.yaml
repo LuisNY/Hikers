@@ -1,0 +1,62 @@
+---
+  hikers:
+    hiker_1: &H1
+      name: A
+      speed: 100
+
+    hiker_2: &H2
+      name: B
+      speed: 50
+
+    hiker_3: &H3
+      name: C
+      speed: 20
+
+    hiker_4: &H4
+      name: D
+      speed: 10
+
+    hiker_5: &H5
+      name: E
+      speed: 2.5
+
+    hiker_6: &H6
+      name: F
+      speed: 25
+
+    hiker_7: &H7
+      name: G
+      speed: 15
+
+
+  bridges:
+    bridge_1: &B1
+      length: 100
+      hikers:
+        - *H1
+        - *H2
+        - *H3
+        - *H4
+
+    bridge_2: &B2
+      length: 250
+      hikers:
+        - *H1
+        - *H2
+        - *H3
+        - *H4
+        - *H5
+
+    bridge_3: &B3
+      length: 150
+      hikers:
+        - *H1
+        - *H2
+        - *H3
+        - *H4
+        - *H5
+        - *H6
+        - *H7
+
+
+
