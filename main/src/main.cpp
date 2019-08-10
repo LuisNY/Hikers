@@ -5,11 +5,11 @@
 #include <yaml-cpp/node/detail/node.h>
 #include <yaml-cpp/node/detail/node_data.h>
 
-#include <bridges/src/bridges.hpp>
+#include <forest/src/forest.h>
 
 int main() {
 
-	YAML::Node config = YAML::LoadFile("/home/luipepe/CLionProjects/hikers/example.yaml");
+	YAML::Node config = YAML::LoadFile("/home/luigipepe/hikers/example.yaml");
 
 	if(config["hikers"]) {
 		std::cout << config["hikers"].size() << " hikers" << std::endl;
@@ -31,6 +31,7 @@ int main() {
 		}
 	}
 
+	forest::Forest f;
 	bridge::Bridge(12);
 	hiker::Hiker h("A", 100);
 	std::cout << "first hiker: name " << h.getName() << ", speed " << h.getSpeed();

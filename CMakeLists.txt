@@ -12,6 +12,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -std=c++17 -O0 -ggdb")
 find_package(yaml-cpp REQUIRED)
 
 add_subdirectory(main)
+add_subdirectory(forest)
 add_subdirectory(hikers)
 add_subdirectory(bridges)
 
