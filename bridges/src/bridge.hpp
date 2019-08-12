@@ -21,7 +21,8 @@ public:
 	void sortHikers();
 	float computeCrossingTime();
 
-
+	float classicAlgo(const std::vector<float>&);
+	float greedyAlgo(const std::vector<float>&);
 
 };
 

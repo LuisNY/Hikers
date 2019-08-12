@@ -7,7 +7,7 @@ namespace hiker {
 class Hiker {
 
 	std::string name_;
-	float speed_;
+	float speed_; // ft/minute
 
 public:
 
