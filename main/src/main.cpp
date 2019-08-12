@@ -10,57 +10,48 @@
 int main() {
 
 	YAML::Node config = YAML::LoadFile("/home/luipepe/CLionProjects/hikers/example.yaml");
-  //std::vector<std::shared_ptr<hiker::Hiker>> hikers;
 
-  // create forest and initialize number of bridges found in input file
+  // create forest and initialize number of bridges found in yaml file
   int num_bridges = static_cast<int>(config["bridges"].size());
 	forest::Forest forest(num_bridges);
 
 	//iterate through bridges found in yaml file, create a new object for each bridge
-	//and move unique_ptr to this obbect to vector container in forest object
+	//and move unique_ptr to this object to vector contained in forest object
 	if(config["bridges"]) {
-		std::cout << config["bridges"].size() << " bridges" << std::endl;
+		std::cout << "found " << config["bridges"].size() << " bridges" << std::endl;
 		for(auto br : config["bridges"]){
 			std::cout << br.first.as<std::string>() << " is " << br.second["length"].as<int>() << std::endl;
-			std::string name =  br.second["name"].as<std::string>();
-			float len = br.second["length"].as<int>();
-			forest.addBridge(std::move(std::make_unique<bridge::Bridge>(name, len)));
+			auto name =  br.second["name"].as<std::string>();
+			auto len = br.second["length"].as<float>();
+			forest.addBridge(std::move(std::make_unique<bridge::Bridge>(name, len)), name);
 		}
 	}
 
-	//iterate through hikers, create new object for each hiker in yaml file,
+	//iterate through hikers, create new object for each hiker found in yaml file,
 	//and associate each hiker with the bridge that he/she is crossing
 	if(config["hikers"]) {
-		std::cout << config["hikers"].size() << " hikers" << std::endl;
+		std::cout << "found " << config["hikers"].size() << " hikers" << std::endl;
 		for(auto hiker : config["hikers"]) {
 			std::cout << hiker.first.as<std::string>()  << std::endl;
 			std::cout << hiker.second["name"].as<std::string>() << "  " << hiker.second["speed"].as<float>() << std::endl;
-			std::string name = hiker.second["name"].as<std::string>();
-			float speed = hiker.second["speed"].as<float>();
+			auto hiker_name = hiker.second["name"].as<std::string>();
+			auto hiker_speed = hiker.second["speed"].as<float>();
 
-			auto new_hiker = std::make_shared<hiker::Hiker>(name, speed);
+			//create new hiker object
+			auto new_hiker = std::make_shared<hiker::Hiker>(hiker_name, hiker_speed);
 
-			std::cout << hiker.second["bridges"].size() << " bridges" << std::endl;
 			for(auto br : hiker.second["bridges"]){
-        std::cout << "br name: " << br["name"].as<std::string>() << std::endl;
-        std::cout << "br len: " << br["length"].as<std::string>() << std::endl;
+				auto bridge_name = br["name"].as<std::string>();
 
-        for(auto it = forest.getBridges().begin(); it!=forest.getBridges().end(); it++){
-					if((*it)->getName() == br["name"].as<std::string>()) {
-						std::cout << "trovato " << (*it)->getName() << std::endl;
-						(*it)->addHiker(new_hiker);
-					}
-        }
-
+				if(forest.getBridges().find(bridge_name) != forest.getBridges().end()){
+					std::cout << hiker_name << " will cross " << bridge_name << std::endl;
+					//add a shared_ptr to new hiker object to a vector of shared_ptr in bridge object
+					//the bridge object is pointed by a unique_ptr since each bridge is unique in the forest
+					forest.getBridges().find(bridge_name)->second->addHiker(new_hiker);
+				}
 			}
 		}
 	}
-
-
-	bridge::Bridge("coa", 12);
-	hiker::Hiker h("A", 100);
-	std::cout << "first hiker: name " << h.getName() << ", speed " << h.getSpeed();
-
 
 	return 0;
 }
