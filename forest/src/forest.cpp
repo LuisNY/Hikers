@@ -11,7 +11,7 @@ namespace forest {
     bridges_.push_back(std::move(bridge));
   }
 
-  //std::vector<std::unique_ptr<bridge::Bridge>> Forest::getBridges(){
-    //return bridges_;
-  //}
+  const std::vector<std::unique_ptr<bridge::Bridge>>& Forest::getBridges(){
+    return bridges_;
+  }
 }

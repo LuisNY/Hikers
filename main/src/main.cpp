@@ -9,7 +9,7 @@
 
 int main() {
 
-	YAML::Node config = YAML::LoadFile("/home/luigipepe/hikers/example.yaml");
+	YAML::Node config = YAML::LoadFile("/home/luipepe/CLionProjects/hikers/example.yaml");
   //std::vector<std::shared_ptr<hiker::Hiker>> hikers;
 
   // create forest and initialize number of bridges found in input file
@@ -37,13 +37,15 @@ int main() {
 			std::cout << hiker.second["name"].as<std::string>() << "  " << hiker.second["speed"].as<float>() << std::endl;
 			std::string name = hiker.second["name"].as<std::string>();
 			float speed = hiker.second["speed"].as<float>();
+
+			auto new_hiker = std::make_shared<hiker::Hiker>(name, speed);
+
 			std::cout << hiker.second["bridges"].size() << " bridges" << std::endl;
 			for(auto br : hiker.second["bridges"]){
         std::cout << "br name: " << br["name"].as<std::string>() << std::endl;
         std::cout << "br len: " << br["length"].as<std::string>() << std::endl;
 
-        auto new_hiker = std::make_shared<hiker::Hiker>(name, speed);
-        for(auto it = forest.bridges_.begin(); it!=forest.bridges_.end(); it++){
+        for(auto it = forest.getBridges().begin(); it!=forest.getBridges().end(); it++){
 					if((*it)->getName() == br["name"].as<std::string>()) {
 						std::cout << "trovato " << (*it)->getName() << std::endl;
 						(*it)->addHiker(new_hiker);
