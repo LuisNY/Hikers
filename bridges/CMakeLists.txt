@@ -6,8 +6,8 @@ include_directories(
 )
 
 set(BRIDGE_FILES
-        src/bridges.cpp
-        src/bridges.hpp)
+        src/bridge.cpp
+        src/bridge.hpp)
 
 add_library(
         bridge ${BRIDGE_FILES})
