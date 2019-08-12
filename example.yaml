@@ -7,7 +7,7 @@
 
     bridge_2: &B2
       name: bridge_2
-      length: 250
+      length: 100
 
     bridge_3: &B3
       name: bridge_3
@@ -24,7 +24,7 @@
 
     hiker_2:
       name: B
-      speed: 50
+      speed: 25
       bridges:
         - *B1
         - *B2

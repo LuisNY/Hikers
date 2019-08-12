@@ -49,6 +49,7 @@ float Bridge::computeCrossingTime() {
 		return time_vect[num_hikers-1];
 	}
 
+	//decide what algo to use
 	if(time_vect[1]*2 > time_vect[0]*time_vect[2]){
 		return greedyAlgo(time_vect);
 	} else {
@@ -65,6 +66,20 @@ float Bridge::classicAlgo(const std::vector<float>& time_vect){
 float Bridge::greedyAlgo(const std::vector<float>& time_vect) {
 	float time=0;
 	std::cout << "greedy algo" << std::endl;
+
+	auto index = time_vect.size()-1;
+	std::cout << "original index " << index << std::endl;
+	while(index>0){
+		std::cout << "current index " << index << std::endl;
+		std::cout << "add " << time_vect[index] << std::endl;
+		time += time_vect[index];
+		index--;
+		if(index>=1){
+			std::cout << "add " << time_vect[0] << std::endl;
+			time += time_vect[0];
+		}
+	}
+	std::cout << "tot time " << time << std::endl;
 	return time;
 }
 
