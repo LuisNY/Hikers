@@ -11,7 +11,19 @@ namespace forest {
     bridges_.insert(std::make_pair(name,std::move(bridge)));
   }
 
-  const std::unordered_map<std::string, std::unique_ptr<bridge::Bridge>>& Forest::getBridges(){
+  const std::unordered_map<std::string, std::unique_ptr<bridge::Bridge>>& Forest::getBridges() const {
     return bridges_;
   }
+
+	float Forest::computeFastestCrossingTime() {
+		float tot_time = 0;
+		std::cout << "bridges" << std::endl;
+		for(auto it = bridges_.begin(); it != bridges_.end(); it++){
+			std::cout << it->first << std::endl;
+			tot_time += it->second->computeCrossingTime();
+		}
+		return tot_time;
+	}
+
+
 }

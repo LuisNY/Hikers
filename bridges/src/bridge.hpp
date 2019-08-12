@@ -4,6 +4,7 @@
 #include <vector>
 #include <hikers/src/hiker.hpp>
 #include <memory>
+#include <algorithm>
 
 namespace bridge {
 class Bridge {
@@ -16,7 +17,12 @@ public:
 	Bridge(const std::string&, float length);
 
 	void addHiker(const std::shared_ptr<hiker::Hiker>&);
-	std::string getName();
+
+	void sortHikers();
+	float computeCrossingTime();
+
+
+
 };
 
 }

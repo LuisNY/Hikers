@@ -16,9 +16,8 @@ public:
 
   Forest(int num_bridges);
   void addBridge(std::unique_ptr<bridge::Bridge>&&, const std::string&);
-
-  const std::unordered_map<std::string, std::unique_ptr<bridge::Bridge>>& getBridges();
-
+  const std::unordered_map<std::string, std::unique_ptr<bridge::Bridge>>& getBridges() const;
+	float computeFastestCrossingTime();
 
 };
 

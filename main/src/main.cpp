@@ -9,7 +9,12 @@
 
 int main() {
 
-	YAML::Node config = YAML::LoadFile("/home/luipepe/CLionProjects/hikers/example.yaml");
+	YAML::Node config;
+	try {
+		config = YAML::LoadFile("/home/luipepe/CLionProjects/hikers/example.yaml");
+	} catch(...){
+		std::cout << "error loading yaml file" << std::endl;
+	}
 
   // create forest and initialize number of bridges found in yaml file
   int num_bridges = static_cast<int>(config["bridges"].size());
@@ -52,6 +57,9 @@ int main() {
 			}
 		}
 	}
+
+
+	forest.computeFastestCrossingTime();
 
 	return 0;
 }
