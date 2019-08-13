@@ -3,32 +3,31 @@
 
 namespace bridge {
 
+//needed comparator to sort the vector of shared_ptr
 struct comparator {
 	bool operator()(std::shared_ptr<hiker::Hiker> i, std::shared_ptr<hiker::Hiker> j){
 		return i->getSpeed() > j->getSpeed();
 	}
 };
 
+//constructor
 Bridge::Bridge(const std::string& name, float length) : name_(name), length_(length) {}
 
-
+//add pointer to new hiker that will cross this bridge
 void Bridge::addHiker(const std::shared_ptr<hiker::Hiker> & hiker) {
   hikers_.push_back(hiker);
 }
 
-
+//sort hikers according to their speed such that the fastest is at index 0
 void Bridge::sortHikers() {
 
 	std::sort(hikers_.begin(), hikers_.end(), comparator());
-
-	for(auto h:hikers_){
-		std::cout << h->getName() << std::endl;
-	}
 }
 
+//compute minimum time required for all hikers to cross this bridge
 float Bridge::computeCrossingTime() {
 
-	sortHikers(); //sort hikers in vector so that the gastest is in first position etc..
+	sortHikers(); //sort hikers in vector so that the fastest is in first position etc..
 
 	auto num_hikers = hikers_.size();
 
@@ -55,7 +54,25 @@ float Bridge::computeCrossingTime() {
 	//set index to last elem of time_vect
 	auto index = num_hikers-1;
 
-	//add to 'time' the time for all obligated trips needed to bring hikers back and forth
+	/*
+	 * there are 2 general algos that can be used to solve this problem:
+	 * 1) the first is the 'obvious' one, where one hiker crosses the bridge with the fastest hiker
+	 * and the fastest hiker then goes back to pick up a new hiker, until there are no hikers left
+	 * 2) the second is the 'classical' algo, where the idea is that slow hikers cross together
+	 * to minimize the crossing time
+	 *
+	 * There is no algo that will perform better in all cases, so the key of the problem is to understand what
+	 * algo needs to be used according to the input values
+	 *
+	 * However, it is noticeable that no matter what algo is used, there is a common minimum number of trips that need to
+	 * be done. The idea in this program is to find the common minimum number of trips (or the minimum sum of the times required
+	 * to complete these trips) and then add to this amount the minimum sum of times between the remaining times needed by
+	 * the two different algos.
+	 *
+	*/
+
+
+	//add to 'time' the common minimum time needed for all obligated trips
 	while(index>1){
 		time += time_vect[index] + time_vect[0];
 		index -= 2;
@@ -83,7 +100,6 @@ float Bridge::computeCrossingTime() {
 	//the min value between 'time_temp1' and 'time_temp2'
 	time += std::min(time_temp1, time_temp2);
 
-	std::cout << "time for this bridge is " << time << std::endl;
 	return time;
 }
 

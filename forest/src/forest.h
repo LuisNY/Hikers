@@ -4,21 +4,22 @@
 #include <bridges/src/bridge.hpp>
 #include <vector>
 #include <unordered_map>
+#include <yaml-cpp/yaml.h>
+
 namespace forest {
 
 class Forest {
 
-  int num_bridges_;
-  std::unique_ptr<int> time_; // in secs
+	//the forest object has an unordered_map of unique_ptr to bridge objects
 	std::unordered_map<std::string, std::unique_ptr<bridge::Bridge>> bridges_;
 
 public:
 
-  Forest(int num_bridges);
+  Forest() = default;
   void addBridge(std::unique_ptr<bridge::Bridge>&&, const std::string&);
   const std::unordered_map<std::string, std::unique_ptr<bridge::Bridge>>& getBridges() const;
-	float computeFastestCrossingTime();
-
+	float computeFastestCrossingTime() const;
+	void parseInputFile(const YAML::Node&);
 };
 
 }

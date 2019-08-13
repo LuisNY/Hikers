@@ -12,13 +12,10 @@ class Hiker {
 public:
 
 	Hiker(const std::string &name, float speed);
-	//Hiker() = delete;
+	Hiker() = delete;
 	Hiker(const hiker::Hiker&) = default;
 	~Hiker() = default;
-
-	std::string getName() const;
 	float getSpeed() const;
-
 };
 }
 
