@@ -13,3 +13,5 @@ add_library(
         bridge ${BRIDGE_FILES})
 
 target_link_libraries(bridge hiker)
+
+add_subdirectory(test)

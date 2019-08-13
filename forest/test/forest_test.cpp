@@ -25,4 +25,5 @@ int main(){
 	assert(f.getBridges().find("item_1")->first == "item_1");
 	assert(f.getBridges().find("item_1")->second->getHikers().size() == 1);
 	assert(f.getBridges().find("item_1")->second->getHikers()[0]->getSpeed() == 12);
+	assert(f.getBridges().find("item_1")->second->getHikers()[0]->getName() == "A");
 }

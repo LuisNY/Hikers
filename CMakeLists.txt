@@ -23,6 +23,7 @@ add_subdirectory(bridges)
 # Add dependencies for all tests
 add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS
         forest_test
+        bridge_test
         )
 
 

@@ -9,4 +9,8 @@ float Hiker::getSpeed() const {
 	return speed_;
 }
 
+std::string Hiker::getName() const {
+	return name_;
+}
+
 }

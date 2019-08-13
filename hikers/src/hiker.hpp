@@ -16,6 +16,7 @@ public:
 	Hiker(const hiker::Hiker&) = default;
 	~Hiker() = default;
 	float getSpeed() const;
+	std::string getName() const;
 };
 }
 
