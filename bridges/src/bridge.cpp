@@ -18,6 +18,10 @@ void Bridge::addHiker(const std::shared_ptr<hiker::Hiker> & hiker) {
   hikers_.push_back(hiker);
 }
 
+const std::vector<std::shared_ptr<hiker::Hiker>>& Bridge::getHikers(){
+	return hikers_;
+}
+
 //sort hikers according to their speed such that the fastest is at index 0
 void Bridge::sortHikers() {
 

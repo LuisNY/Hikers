@@ -1,0 +1,13 @@
+--- #test
+
+  bridges:
+    item_1: &I1
+      name: item_1
+      length: 100
+
+  hikers:
+    other_item_1:
+      name: A
+      speed: 12
+      bridges:
+        - *I1

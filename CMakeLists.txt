@@ -11,9 +11,19 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -std=c++17 -O0 -ggdb")
 
 find_package(yaml-cpp REQUIRED)
 
+# For 'make check' testing
+set(CMAKE_CTEST_COMMAND ctest)
+enable_testing()
+
 add_subdirectory(main)
 add_subdirectory(forest)
 add_subdirectory(hikers)
 add_subdirectory(bridges)
+
+# Add dependencies for all tests
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS
+        forest_test
+        )
+
 
 install(PROGRAMS bin/hikers_program DESTINATION bin)

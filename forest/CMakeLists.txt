@@ -13,3 +13,5 @@ add_library(
         forest ${FOREST_FILES})
 
 target_link_libraries(forest bridge hiker)
+
+add_subdirectory(test)

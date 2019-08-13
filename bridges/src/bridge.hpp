@@ -22,6 +22,9 @@ public:
 	void addHiker(const std::shared_ptr<hiker::Hiker>&);
 	void sortHikers();
 	float computeCrossingTime();
+	const std::vector<std::shared_ptr<hiker::Hiker>>& getHikers();
+
+
 };
 
 }
