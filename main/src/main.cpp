@@ -4,14 +4,17 @@
 #include <yaml-cpp/node/node.h>
 #include <yaml-cpp/node/detail/node.h>
 #include <yaml-cpp/node/detail/node_data.h>
-
+#include <sys/file.h>
 #include <forest/src/forest.h>
+#include <experimental/filesystem>
 
 int main() {
 
 	YAML::Node config;
 	try {
-		config = YAML::LoadFile("/home/luigipepe/hikers/example.yaml");
+		//current directory is /bin but example.yaml is one level up
+		auto path = std::experimental::filesystem::current_path();
+		config = YAML::LoadFile(path.generic_string()+"/../example.yaml");
 	} catch(...){
 		std::cout << "error loading yaml file" << std::endl;
 	}
