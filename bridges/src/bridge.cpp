@@ -35,7 +35,7 @@ float Bridge::computeCrossingTime() {
 	//build vector with time of crossing for each hiker
 	std::vector<float> time_vect;
 	for(const auto& h : hikers_){
-		std::cout << "adding " << length_/h->getSpeed() << std::endl;
+		//std::cout << "adding " << length_/h->getSpeed() << std::endl;
 		time_vect.push_back(length_/h->getSpeed());
 	}
 
@@ -49,39 +49,44 @@ float Bridge::computeCrossingTime() {
 		return time_vect[num_hikers-1];
 	}
 
-	//decide what algo to use
-	if(time_vect[1]*2 > time_vect[0]*time_vect[2]){
-		return greedyAlgo(time_vect);
-	} else {
-		return classicAlgo(time_vect);
-	}
-}
+	//set initial time to 0 min
+	float time = 0;
 
-float Bridge::classicAlgo(const std::vector<float>& time_vect){
-	float time=0;
-	std::cout << "classic algo" << std::endl;
+	//set index to last elem of time_vect
+	auto index = num_hikers-1;
+
+	//add to 'time' the time for all obligated trips needed to bring hikers back and forth
+	while(index>1){
+		time += time_vect[index] + time_vect[0];
+		index -= 2;
+	}
+
+	//at this point 'time' does not includes all trips yet
+	//we create here two additional time variables: 'time_temp1' and 'time_temp2'
+	//but we will only add the minimum of these two to 'time' variable
+	float time_temp1 = 0,  time_temp2 = 0;
+
+	index = num_hikers-2;
+	while(index>1){
+		time_temp1 += time_vect[index] + time_vect[0];
+		index -= 2;
+	}
+	time += time_vect[1];
+
+	//'factor' is an even number given by the number of hikers after the first two
+	//and adjusted by 1 in case this number is odd
+	//'factor' is used to compute time_temp2
+	auto factor = ((num_hikers-2)%2==0 ? num_hikers-2 : num_hikers-3);
+	time_temp2 = time_vect[1] * factor;
+
+	//finally add to the already partially computed 'time'
+	//the min value between 'time_temp1' and 'time_temp2'
+	time += std::min(time_temp1, time_temp2);
+
+	std::cout << "time for this bridge is " << time << std::endl;
 	return time;
 }
 
-float Bridge::greedyAlgo(const std::vector<float>& time_vect) {
-	float time=0;
-	std::cout << "greedy algo" << std::endl;
-
-	auto index = time_vect.size()-1;
-	std::cout << "original index " << index << std::endl;
-	while(index>0){
-		std::cout << "current index " << index << std::endl;
-		std::cout << "add " << time_vect[index] << std::endl;
-		time += time_vect[index];
-		index--;
-		if(index>=1){
-			std::cout << "add " << time_vect[0] << std::endl;
-			time += time_vect[0];
-		}
-	}
-	std::cout << "tot time " << time << std::endl;
-	return time;
-}
 
 
 }

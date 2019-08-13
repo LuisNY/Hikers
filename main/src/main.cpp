@@ -11,7 +11,7 @@ int main() {
 
 	YAML::Node config;
 	try {
-		config = YAML::LoadFile("/home/luipepe/CLionProjects/hikers/example.yaml");
+		config = YAML::LoadFile("/home/luigipepe/hikers/example.yaml");
 	} catch(...){
 		std::cout << "error loading yaml file" << std::endl;
 	}

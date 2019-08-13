@@ -22,6 +22,7 @@ namespace forest {
 			std::cout << it->first << std::endl;
 			tot_time += it->second->computeCrossingTime();
 		}
+		std::cout << "minimum tot time: " << tot_time << std::endl;
 		return tot_time;
 	}
 
