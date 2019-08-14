@@ -43,7 +43,7 @@ Run the following command to run the unit tests (from `build` directory):
 make check
 ```
 
-The executable is in `/hikers/bin/hikers_program`. Run the following (from `build` directory) to execute:
+The executable is in `path_to_hikers/hikers/bin/hikers_program`. Run the following (from `build` directory) to execute:
 ```
 ../bin/hikers_program
 ```
