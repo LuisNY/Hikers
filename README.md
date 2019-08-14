@@ -1,21 +1,14 @@
 # Hikers
 
- There are 2 algorithms that can be used to solve this problem:
+There are 2 algorithms that can be used to solve this problem:
 
-  1) the first is the 'obvious' one, where one hiker crosses the bridge with the fastest hiker
-    and the fastest hiker then goes back to pick up a new hiker, until there are no hikers left
+1) The first is the 'obvious' one, where one hiker crosses the bridge with the fastest hiker and the fastest hiker then goes back with the torch to pick up a new hiker, until there are no hikers left.
 
-  2) the second is the 'classical' algorithm, where the idea is that slow hikers cross together
-    to minimize the crossing time.
+2) The second is the 'classical' algorithm, where the idea is that slow hikers cross together to minimize the crossing time. So at the beginning the two fastest hikers cross together, the fastest goes back bringing the torch with him and leaving the second fastest on the other side, then the two slowest cross together with the torch and the second fastest (who had remained at the opposite side of the bridge) comes back with the torch. And we repeat this: the two fastest cross together, the fastest goes back, the two slowest remaining hikers cross together, the second slowest goes back... and so on, until all hikers have crossed. 
 
- There is no algorithm that will perform better in all cases, so the key of the problem is to understand what
- algorithm needs to be used according to the input values.
+There is no algorithm that will perform better in all cases, so the key of the problem is to understand what algorithm needs to be used according to the input values.
 
- However, it is noticeable that no matter what algorithm is used, there is a common number of trips that need to
- be done in both algorithms. The idea in this program is to find the minimum time required to complete the trips
- that the two algorithms have in common, and then add to this time the fastest of the remaining times calculated
- by the two different algorithms.
-
+However, it is noticeable that no matter what algorithm is used, there is a common number of trips that need to be done in both algorithms. The idea in this proram is to find the minimum time required to complete the trips that the two algorithms have in common, and then add to this time the fastest of the remaining times calculated by the two different algorithms.
 
 Dependencies
 -
