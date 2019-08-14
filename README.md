@@ -47,5 +47,5 @@ The executable is in `path_to_Hikers/Hikers/bin/hikers_program`. Run the followi
 ```
 ./path_to_Hikers/Hikers/bin/hikers_program
 ```
-You will be asked to insert the path to the input yaml file to parse. 
-An example file is located in `Hiker` directory.
+As the program starts you will be asked to insert the path to the input .yaml file to parse. 
+An example file is located in `Hikers` directory.
