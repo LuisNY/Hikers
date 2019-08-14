@@ -16,7 +16,6 @@ int main(){
 	br1.addHiker(h2);
 	br1.addHiker(h3);
 	br1.addHiker(h4);
-
 	assert(br1.computeCrossingTime() == 17);
 
 	bridge::Bridge br2("bridge2", 100);
@@ -24,7 +23,5 @@ int main(){
 	br2.addHiker(h5);
 	br2.addHiker(h3);
 	br2.addHiker(h4);
-
 	assert(br2.computeCrossingTime() == 21);
-
 }

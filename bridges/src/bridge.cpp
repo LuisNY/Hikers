@@ -78,7 +78,7 @@ float Bridge::computeCrossingTime() {
 		time += time_vect[index] + time_vect[0];
 		index -= 2;
 	}
-    time += time_vect[1];
+	time += time_vect[1];
 
 	//at this point 'time' does not includes the time to complete all trips yet
 	//we create here two additional time variables: 'time_temp1' and 'time_temp2'
@@ -92,7 +92,6 @@ float Bridge::computeCrossingTime() {
 		time_temp1 += time_vect[index] + time_vect[0];
 		index -= 2;
 	}
-	//time += time_vect[1];
 
 	//'factor' is an even number equal to the number of hikers minus 2
 	//and decreased by 1 in case such number is odd
