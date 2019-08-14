@@ -20,7 +20,7 @@
 Dependencies
 -
 
-Need to install the dependency yaml-cpp executing the following commands:
+Need to install the dependency `yaml-cpp` executing the following commands:
 
 ```
 sudo apt-get update
@@ -30,7 +30,7 @@ sudo apt-get install libyaml-cpp-dev
 Build and run
 -
 
-Run the following commands to build the code:
+Run the following commands to build the code (from `hikers` directory):
 ```
 mkdir build
 cd build
@@ -43,7 +43,7 @@ Run the following command to run the unit tests (from `build` directory):
 make check
 ```
 
-The executable is in `hikers/bin/hikers_program`. Run the following (from `build` directory) to execute:
+The executable is in `/hikers/bin/hikers_program`. Run the following (from `build` directory) to execute:
 ```
 ../bin/hikers_program
 ```
