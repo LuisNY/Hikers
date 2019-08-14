@@ -1,4 +1,4 @@
-# hikers
+# Hikers
 
  There are 2 algorithms that can be used to solve this problem:
 
