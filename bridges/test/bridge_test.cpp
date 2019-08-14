@@ -11,11 +11,15 @@ int main(){
 	std::shared_ptr<hiker::Hiker> h4 = std::make_shared<hiker::Hiker>("D", 10);
 	std::shared_ptr<hiker::Hiker> h5 = std::make_shared<hiker::Hiker>("D", 20);
 
+	//make sure that my solution picks the right algorithm
+	//(classical vs obvious) for the right input of values.
+
 	bridge::Bridge br1("bridge1", 100);
 	br1.addHiker(h1);
 	br1.addHiker(h2);
 	br1.addHiker(h3);
 	br1.addHiker(h4);
+	//classical
 	assert(br1.computeCrossingTime() == 17);
 
 	bridge::Bridge br2("bridge2", 100);
@@ -23,5 +27,6 @@ int main(){
 	br2.addHiker(h5);
 	br2.addHiker(h3);
 	br2.addHiker(h4);
+	//obvious
 	assert(br2.computeCrossingTime() == 21);
 }
