@@ -7,4 +7,4 @@ include_directories(
 
 add_executable(hikers_program src/main.cpp)
 
-target_link_libraries(hikers_program forest hiker bridge yaml-cpp stdc++fs)
+target_link_libraries(hikers_program forest hiker bridge yaml-cpp)
