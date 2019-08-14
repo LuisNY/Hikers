@@ -43,7 +43,9 @@ Run the following command to run the unit tests (from `build` directory):
 make check
 ```
 
-The executable is in `path_to_Hikers/Hikers/bin/hikers_program`. Run the following (from `build` directory) to execute:
+The executable is in `path_to_Hikers/Hikers/bin/hikers_program`. Run the following to execute:
 ```
-../bin/hikers_program
+./path_to_Hikers/Hikers/bin/hikers_program
 ```
+You will be asked to insert the path to the input yaml file to parse. 
+An example file is located in `Hiker` directory.
