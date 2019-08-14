@@ -13,9 +13,9 @@ namespace forest {
     return bridges_;
   }
 
+  //compute the fastest time to cross all bridges in the forest
 	float Forest::computeFastestCrossingTime() const {
 		float tot_time = 0;
-		std::cout << "compute crossing time" << std::endl;
 		for(auto it = bridges_.begin(); it != bridges_.end(); it++){
 			std::cout << it->first << std::endl;
 			tot_time += it->second->computeCrossingTime();
@@ -24,13 +24,15 @@ namespace forest {
 		return tot_time;
 	}
 
+	//parse the input file and create all bridge and hiker objects
   void Forest::parseInputFile(const YAML::Node & file) {
 
-		//iterate through bridges found in yaml file, create a new object for each bridge
-		//and move unique_ptr to the new bridge object to vector contained in forest object
+		//iterate through bridges found in yaml file, create a new object for each bridge pointed by unique_ptr
+		//then move unique_ptr to the new bridge object to map contained in forest object
 		if(file["bridges"]) {
-			std::cout << "found " << file["bridges"].size() << " bridges" << std::endl;
+			std::cout << "Found " << file["bridges"].size() << " bridges" << std::endl;
 			for(auto br : file["bridges"]){
+			  std::cout << "New bridge" << std::endl;
 				std::cout << br.first.as<std::string>() << " is " << br.second["length"].as<int>() << " ft long" << std::endl;
 				auto name =  br.second["name"].as<std::string>();
 				auto len = br.second["length"].as<float>();
@@ -38,12 +40,12 @@ namespace forest {
 			}
 		}
 
-		//iterate through hikers, create new object for each hiker found in yaml file,
-		//and associate each hiker with the bridge that he/she is crossing
+		//iterate through hikers, create new object for each hiker found in yaml file pointed by shared_ptr
+		//and associate each hiker with the bridge that she is crossing
 		if(file["hikers"]) {
-			std::cout << "found " << file["hikers"].size() << " hikers" << std::endl;
+			std::cout << "Found " << file["hikers"].size() << " hikers" << std::endl;
 			for(auto hiker : file["hikers"]) {
-				std::cout << "new hiker" << std::endl;
+				std::cout << "New hiker" << std::endl;
 				std::cout << "name: " << hiker.second["name"].as<std::string>() << std::endl;
 				std::cout << "speed: " << hiker.second["speed"].as<float>() << "ft/min" << std::endl;
 				auto hiker_name = hiker.second["name"].as<std::string>();
@@ -60,7 +62,7 @@ namespace forest {
 					//if hiker is going to cross current bridge
 					if(getBridges().find(bridge_name) != getBridges().end()){
 						std::cout << hiker_name << " will cross " << bridge_name << std::endl;
-						//add a shared_ptr to new hiker object to a vector of shared_ptr in bridge object
+						//add the shared_ptr to new hiker object to a vector of shared_ptr in corresponding bridge object
 						getBridges().find(bridge_name)->second->addHiker(new_hiker);
 					}
 				}
