@@ -1,5 +1,8 @@
 # Hikers
 
+Algorithm descripton
+-
+
 There are 2 algorithms that can be used to solve this problem:
 
 1) The first is the 'obvious' algorithm, where any hiker crosses the bridge with the fastest hiker and the torch, then the fastest hiker goes back with the torch to pick up a new hiker, until there are no hikers left.
@@ -10,7 +13,7 @@ There is no algorithm that will perform better in all cases, so the key of the p
 
 However, it is noticeable that no matter what algorithm is used, there is a common number of trips that need to be done in both algorithms. The idea in this program is to find the minimum time required to complete the trips that the two algorithms have in common, and then add to this time the fastest of the remaining times calculated by the two different algorithms.
 
-For example, let's say we have a sorted vector of floats, where each element is the time required by a hiker to cross the bridge. Since the vector is sorted, the first element represents the fastest hiker (minimum time to cross).
+For example, let's say we have a sorted vector of `floats`, where each element is the time required by a hiker to cross the bridge. Since the vector is sorted, the first element represents the fastest hiker (minimum time to cross).
 
 `[1,2,5,10]` 
 
@@ -32,9 +35,9 @@ Following the 'obvious' algorithm the trips will be:
      | (1,10) 10 ->     | 2,5
 ```
 
-In both algorithms hikers 1, 2, and 10 cross at least once, making their sum the "common minimum time" (CMT) taken to cross the bridge by the hikers. CMT follows the equation below:
+In both algorithms hikers 1, 2, and 10 cross at least once, making their sum the "common minimum time" (CMT) taken to cross the bridge by the hikers. CMT follows the equation below, where the word in [] is the index of the vector considered.
 
-CMT = vector[second] + vector[last] + vector[first] + vector[last - 2] + vector[first] + vector[last - 4] + vector[first] + .... as long as `last - n > second` 
+CMT = vector[second] + vector[last] + vector[first] + vector[last - 2] + vector[first] + vector[last - 4] + vector[first] + .... while `last - n > second` 
 
 The remaining time obtained using the 'classical' algorithm (RTc) follows the equation:
 
@@ -44,13 +47,14 @@ where `factor = last-second` if (last-second) is even otherwise `factor = last-s
 
 The remaining time obtained using the 'obvious' algorithm (RTo) follows the equation:
 
-RTo = vector[last-1] + vector[first] + vector[last - 3] + vector[first] + vector[last - 5] + vector[first] + ... as long as `last - n > second`
+RTo = vector[last-1] + vector[first] + vector[last - 3] + vector[first] + vector[last - 5] + vector[first] + ... while `last - n > second`
 
 The fastest time = `CMT + min(RTc, RTo)`
 
 Dependencies
 -
 
+This program has been developed and tested in Ubuntu Linux. 
 Need to install the dependency `yaml-cpp` executing the following commands:
 
 ```
