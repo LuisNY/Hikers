@@ -14,24 +14,39 @@ For example, let's say we have a sorted vector of floats, where each element is 
 
 [1,2,5,10] 
 
-Following the 'classical' algorithm the trips will be:
+Following the 'classical' algorithm the trips are shown below. The numbers in parenthesis are the hikers moving in the direction of the arrow, while the number outside the parenthesis is the time taken for the crossing. The numbers outside of the "|" keep track of the hikers on either side of the bridge.
 ```
-5,10 | 1,2  ->     | 
-5,10 |      <-  1  | 2
-1    | 5,10 ->     | 2
-1    |      <-  2  | 5,10
-     | 1,2  ->     | 5,10
+5,10 | (1,2)  2  ->     | 
+5,10 |           <-  1  | 2
+1    | (5,10) 10 ->     | 2
+1    |           <-  2  | 5,10
+     | (1,2)  2  ->     | 5,10
 ```  
 
 Following the 'obvious' algorithm the trips will be:
 ```
-5,10 | 1,2  ->     | 
-5,10 |      <-  1  | 2
-10    | 1,5 ->     | 2
-10    |      <-  1  | 2,5
-     | 1,10  ->     | 2,5
+5,10 | (1,2)  2  ->     | 
+5,10 |           <-  1  | 2
+10   | (1,5)  5  ->     | 2
+10   |           <-  1  | 2,5
+     | (1,10) 10 ->     | 2,5
 ```
 
+In both algorithms hikers 1, 2, and 10 cross at least once, making their sum the "common minimum time" (CMT) taken to cross the bridge by the hikers. CMT follows the equation below:
+
+CMT = vector[second] + vector[last] + vector[first] + vector[last - 2] + vector[first] + vector[last - 4] + vector[first] + .... as long as `last - n > second` 
+
+The remaining time obtained using the 'classical' algorithm (RTc) follows the equation:
+
+RTc = vector[second] * factor
+
+where `factor = last-second` if (last-second) is even otherwise `factor = last-second-1`
+
+The remaining time obtained using the 'obvious' algorithm (RTo) follows the equation:
+
+RTo = vector[last-1] + vector[first] + vector[last - 3] + vector[first] + vector[last - 5] + vector[first] + ... as long as `last - n > second`
+
+The fastest time = `CMT + min(RTc, RTo)`
 
 Dependencies
 -
