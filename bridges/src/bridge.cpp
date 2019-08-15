@@ -54,42 +54,26 @@ float Bridge::computeCrossingTime() {
 	//set index to last elem of time_vect
 	auto index = num_hikers-1;
 
-	/*
-	 * There are 2 general algorithms that can be used to solve this problem:
-	 * 1) the first is the 'obvious' one, where one hiker crosses the bridge with the fastest hiker
-	 * and the fastest hiker then goes back to pick up a new hiker, until there are no hikers left
-	 * 2) the second is the 'classical' algorithm, where the idea is that slow hikers cross together
-	 * to minimize the crossing time.
-	 *
-	 * There is no algo that will perform better in all cases, so the key of the problem is to understand what
-	 * algo needs to be used according to the input values.
-	 *
-	 * However, it is noticeable that no matter what algorithm is used, there is a common number of trips that need to
-	 * be done in both algorithms. The idea in this program is to find the minimum time required to complete the trips
-	 * that the two algorithms have in common, and then add to this time the fastest of the remaining times calculated
-	 * by the two different algorithms.
-	*/
-
-	//set initial time to 0 min
-	float time = 0;
+	//set initial time (CMT) to 0 min
+	float CMT = 0;
 
 	//add to 'time' the minimum time required to complete the trips that the two algorithms have in common
 	while(index>1){
-		time += time_vect[index] + time_vect[0];
+		CMT += time_vect[index] + time_vect[0];
 		index -= 2;
 	}
-	time += time_vect[1];
+		CMT += time_vect[1];
 
 	//at this point 'time' does not includes the time to complete all trips yet
-	//we create here two additional time variables: 'time_temp1' and 'time_temp2'
+	//we create here two additional time variables: 'RTo' and 'RTc'
 	//but we will only add the minimum of these two to 'time' variable
-	//time_temp1 uses the 'obvious' algorithm while time_temp2 uses the 'classic' algorithm
-	float time_temp1 = 0,  time_temp2 = 0;
+	//RTo uses the 'obvious' algorithm while RTc uses the 'classic' algorithm
+	float RTo = 0,  RTc = 0;
 
 	//obvious algo, fastest hiker crosses back and forth each time
 	index = num_hikers-2;
 	while(index>1){
-		time_temp1 += time_vect[index] + time_vect[0];
+		RTo += time_vect[index] + time_vect[0];
 		index -= 2;
 	}
 
@@ -97,13 +81,13 @@ float Bridge::computeCrossingTime() {
 	//and decreased by 1 in case such number is odd
 	//'factor' is used to compute time_temp2
 	auto factor = ((num_hikers-2)%2==0 ? num_hikers-2 : num_hikers-3);
-	time_temp2 = time_vect[1] * factor;
+	RTc = time_vect[1] * factor;
 
 	//finally add to the already partially computed 'time'
 	//the minimum value between 'time_temp1' and 'time_temp2'
-	time += std::min(time_temp1, time_temp2);
-	std::cout << "time for current bridge: " << time << std::endl;
-	return time;
+	CMT += std::min(RTo, RTc);
+	std::cout << "time for current bridge: " << CMT << std::endl;
+	return CMT;
 }
 
 
