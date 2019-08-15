@@ -12,7 +12,7 @@ However, it is noticeable that no matter what algorithm is used, there is a comm
 
 For example, let's say we have a sorted vector of floats, where each element is the time required by a hiker to cross the bridge. Since the vector is sorted, the first element represents the fastest hiker (minimum time to cross).
 
-[1,2,5,10] 
+`[1,2,5,10]` 
 
 Following the 'classical' algorithm the trips are shown below. The numbers in parenthesis are the hikers moving in the direction of the arrow, while the number outside the parenthesis is the time taken for the crossing. The numbers outside of the "|" keep track of the hikers on either side of the bridge.
 ```
