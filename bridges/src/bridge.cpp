@@ -62,7 +62,7 @@ float Bridge::computeCrossingTime() {
 		CMT += time_vect[index] + time_vect[0];
 		index -= 2;
 	}
-		CMT += time_vect[1];
+	CMT += time_vect[1];
 
 	//at this point 'time' does not includes the time to complete all trips yet
 	//we create here two additional time variables: 'RTo' and 'RTc'
@@ -84,7 +84,7 @@ float Bridge::computeCrossingTime() {
 	RTc = time_vect[1] * factor;
 
 	//finally add to the already partially computed 'time'
-	//the minimum value between 'time_temp1' and 'time_temp2'
+	//the minimum value between 'RTo' and 'RTc'
 	CMT += std::min(RTo, RTc);
 	std::cout << "time for current bridge: " << CMT << std::endl;
 	return CMT;
